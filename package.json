@@ -1,0 +1,26 @@
+{
+  "name": "o_typefully",
+  "version": "0.1.0",
+  "description": "A local, single-process tweet composer and scheduler in the spirit of Typefully: drafts, threads, a slot-based queue, X API publishing, and a free reminder/clipboard fallback.",
+  "type": "module",
+  "private": true,
+  "main": "src/server.js",
+  "engines": {
+    "node": ">=22.16.0"
+  },
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning --disable-warning=DEP0040 src/server.js",
+    "dev": "node --watch --disable-warning=ExperimentalWarning --disable-warning=DEP0040 src/server.js",
+    "test": "node --disable-warning=ExperimentalWarning --disable-warning=DEP0040 --test \"test/*.test.js\"",
+    "test:e2e": "node --disable-warning=ExperimentalWarning --disable-warning=DEP0040 --test \"test/e2e/*.test.js\"",
+    "build:vendor": "node scripts/build-vendor.mjs"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "twitter-text": "^3.1.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.12"
+  },
+  "license": "UNLICENSED"
+}

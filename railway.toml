@@ -1,0 +1,14 @@
+# Railway: deploy from this repository with the Dockerfile, then attach a volume
+# mounted at /data (Service -> Volumes, or `railway volume add --mount-path /data`)
+# and set APP_PASSWORD (plus the X_* keys) under Variables. Keep one replica:
+# the scheduler runs inside the process.
+[build]
+  builder = "dockerfile"
+  dockerfilePath = "Dockerfile"
+
+[deploy]
+  numReplicas = 1
+  healthcheckPath = "/healthz"
+  healthcheckTimeout = 60
+  restartPolicyType = "on_failure"
+  restartPolicyMaxRetries = 5

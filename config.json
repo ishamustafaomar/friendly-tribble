@@ -1,0 +1,10 @@
+{
+  "timezone": "America/New_York",
+  "slots": [
+    { "days": ["mon", "tue", "wed", "thu", "fri"], "time": "09:00" },
+    { "days": ["mon", "tue", "wed", "thu", "fri"], "time": "16:00" }
+  ],
+  "schedulerIntervalSeconds": 30,
+  "missedGraceMinutes": 180,
+  "queueDaysAhead": 14
+}

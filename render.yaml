@@ -1,0 +1,27 @@
+# Render Blueprint: a web service built from the Dockerfile with a persistent
+# disk at /data. Persistent disks need a paid instance type (Starter or above);
+# the free tier has no disk and would lose the database on every restart.
+# Deploy: Render dashboard -> New -> Blueprint -> pick this repository.
+services:
+  - type: web
+    name: o-typefully
+    runtime: docker
+    plan: starter
+    region: oregon
+    healthCheckPath: /healthz
+    numInstances: 1        # the in-process scheduler must run exactly once
+    disk:
+      name: data
+      mountPath: /data
+      sizeGB: 1
+    envVars:
+      - key: HOST
+        value: 0.0.0.0
+      - key: PORT
+        value: "3000"
+      - key: DATA_DIR
+        value: /data
+      - key: APP_PASSWORD
+        generateValue: true   # find it under Environment; any username, this password
+      # Add X_API_KEY, X_API_KEY_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
+      # and X_HANDLE in the dashboard to publish via the X API.
