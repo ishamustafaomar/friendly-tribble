@@ -1,0 +1,18 @@
+# Any VPS with Docker: `docker compose up -d`. Data persists in ./data on the host.
+# Put a TLS reverse proxy in front (see README "Deploying") or set APP_PASSWORD
+# and publish the port directly over HTTPS only.
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3000:3000"   # loopback only; change to "3000:3000" to expose it directly (then APP_PASSWORD is a must)
+    volumes:
+      - ./data:/data
+    env_file:
+      - .env                    # APP_PASSWORD, X_* keys, ALLOWED_HOSTS, X_HANDLE
+    environment:
+      HOST: 0.0.0.0
+      PORT: "3000"
+      DATA_DIR: /data
+    stop_grace_period: 10s

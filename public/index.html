@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>o_typefully</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%233b6cf0'/%3E%3Ccircle cx='16' cy='16' r='7' fill='none' stroke='%23fff' stroke-width='3'/%3E%3C/svg%3E">
+</head>
+<body>
+  <div class="app" id="app">
+    <div class="sidebar-backdrop" id="sidebar-backdrop" hidden></div>
+
+    <aside class="sidebar" id="sidebar" aria-label="Drafts, queue and history">
+      <div class="sidebar-head">
+        <span class="brand">o_typefully</span>
+        <button type="button" class="icon-btn" id="sidebar-collapse" aria-label="Hide sidebar" title="Hide sidebar">
+          <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <div class="sidebar-new">
+        <button type="button" class="btn btn-primary btn-block" id="new-draft">New draft</button>
+      </div>
+
+      <nav class="tabs" role="tablist" aria-label="Sections">
+        <button type="button" class="tab" role="tab" id="tab-drafts" data-tab="drafts" aria-selected="true" aria-controls="view-editor">Drafts <span class="count" id="count-drafts">0</span></button>
+        <button type="button" class="tab" role="tab" id="tab-queue" data-tab="queue" aria-selected="false" aria-controls="view-queue">Queue <span class="count" id="count-queue">0</span></button>
+        <button type="button" class="tab" role="tab" id="tab-posted" data-tab="posted" aria-selected="false" aria-controls="view-posted">Posted <span class="count" id="count-posted">0</span></button>
+      </nav>
+
+      <div class="sidebar-list" id="sidebar-list"></div>
+
+      <footer class="sidebar-foot">
+        <div class="pill" id="x-status" title="X API status">X API: checking…</div>
+        <button type="button" class="btn btn-sm btn-block" id="notif-btn"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M8 2a4 4 0 0 0-4 4v3l-1.5 2h11L12 9V6a4 4 0 0 0-4-4zM6.5 13a1.5 1.5 0 0 0 3 0" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Enable notifications</button>
+        <div class="notif-note" id="notif-note" hidden></div>
+        <div class="tz" id="tz-label" title="Timezone"></div>
+      </footer>
+    </aside>
+
+    <main class="main" id="main">
+      <header class="topbar">
+        <button type="button" class="icon-btn" id="sidebar-open" aria-label="Show sidebar" title="Show sidebar" hidden>
+          <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </button>
+        <h1 class="view-title" id="view-title">Editor</h1>
+        <div class="topbar-actions">
+          <button type="button" class="btn btn-sm" id="focus-btn" title="Focus mode (Ctrl/Cmd+Shift+F)"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Focus</button>
+        </div>
+      </header>
+
+      <section class="view view-editor" id="view-editor" role="tabpanel" aria-labelledby="tab-drafts">
+        <div class="editor">
+          <div id="banner"></div>
+          <div class="cards" id="cards"></div>
+          <div class="add-post-row" id="add-post-row">
+            <button type="button" class="btn btn-ghost" id="add-post" aria-label="Add a post to the thread">+ Add post</button>
+            <span class="add-post-hint">or type <code>---</code> on its own line<span class="kbd-hint"> · Ctrl/Cmd+Enter adds the thread to the queue</span></span>
+          </div>
+        </div>
+        <div class="actionbar" id="actionbar"></div>
+      </section>
+
+      <section class="view view-queue" id="view-queue" role="tabpanel" aria-labelledby="tab-queue" hidden></section>
+      <section class="view view-posted" id="view-posted" role="tabpanel" aria-labelledby="tab-posted" hidden></section>
+    </main>
+  </div>
+
+  <button type="button" class="focus-indicator" id="focus-indicator" hidden title="Leave focus mode (Esc)"></button>
+  <div class="toasts" id="toasts"></div>
+  <div id="popover-root"></div>
+  <dialog class="dialog" id="dialog"></dialog>
+  <input type="file" id="file-input" accept="image/png,image/jpeg,image/gif,image/webp" multiple hidden>
+
+  <script src="/vendor/twitter-text.js"></script>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

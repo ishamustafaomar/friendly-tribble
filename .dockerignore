@@ -1,0 +1,13 @@
+node_modules
+data
+.env
+.git
+test
+scripts
+*.md
+.dockerignore
+Dockerfile
+docker-compose.yml
+fly.toml
+render.yaml
+railway.toml
